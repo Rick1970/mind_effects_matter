@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  details: MyString
+  expected_start_date: 2016-12-29
+  tenant_id: 
+
+two:
+  title: MyString
+  details: MyString
+  expected_start_date: 2016-12-29
+  tenant_id: 
