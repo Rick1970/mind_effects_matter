@@ -8,4 +8,13 @@ class Experiment < ActiveRecord::Base
       errors.add(:base, "Free plans cannot have more than one experiment.")
     end  
   end  
+  
+  def self.by_plan_and_tenant(tenant_id)
+    tenant = Tenant.find(tenant_id)
+    if tenant.plan == 'premium'
+      tenant.experiments
+    else
+      tenant.experiments.order(:id).limit(1)
+    end  
+  end  
 end

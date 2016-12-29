@@ -1,5 +1,7 @@
 class ExperimentsController < ApplicationController
   before_action :set_experiment, only: [:show, :edit, :update, :destroy]
+  before_action :set_tenant, only: [:show, :edit, :update, :destroy, :new, :create]
+  before_action :verify_tenant
 
   # GET /experiments
   # GET /experiments.json
@@ -28,11 +30,9 @@ class ExperimentsController < ApplicationController
 
     respond_to do |format|
       if @experiment.save
-        format.html { redirect_to @experiment, notice: 'Experiment was successfully created.' }
-        format.json { render :show, status: :created, location: @experiment }
+        format.html { redirect_to root_url, notice: 'Experiment was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @experiment.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -42,11 +42,9 @@ class ExperimentsController < ApplicationController
   def update
     respond_to do |format|
       if @experiment.update(experiment_params)
-        format.html { redirect_to @experiment, notice: 'Experiment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @experiment }
+        format.html { redirect_to root_url, notice: 'Experiment was successfully updated.' }
       else
         format.html { render :edit }
-        format.json { render json: @experiment.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -56,7 +54,7 @@ class ExperimentsController < ApplicationController
   def destroy
     @experiment.destroy
     respond_to do |format|
-      format.html { redirect_to experiments_url, notice: 'Experiment was successfully destroyed.' }
+      format.html { redirect_to root_url, notice: 'Experiment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -71,4 +69,14 @@ class ExperimentsController < ApplicationController
     def experiment_params
       params.require(:experiment).permit(:title, :details, :expected_start_date, :tenant_id)
     end
+    
+    def set_tenant
+      @tenant = Tenant.find(params[:tenant_id])
+    end  
+    
+    def verify_tenant
+      unless params[:tenant_id] == Tenant.current_tenant_id.to_s
+      redirect_to :root, flash: { error: 'You are not authorized to access any organization other than your own.'}
+      end
+    end  
 end
