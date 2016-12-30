@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161229205437) do
+ActiveRecord::Schema.define(version: 20161229235707) do
+
+  create_table "artifacts", force: :cascade do |t|
+    t.string   "name"
+    t.string   "key"
+    t.integer  "experiment_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "artifacts", ["experiment_id"], name: "index_artifacts_on_experiment_id"
 
   create_table "experiments", force: :cascade do |t|
     t.string   "title"
