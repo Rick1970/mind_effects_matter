@@ -1,12 +1,12 @@
 class ExperimentsController < ApplicationController
-  before_action :set_experiment, only: [:show, :edit, :update, :destroy]
-  before_action :set_tenant, only: [:show, :edit, :update, :destroy, :new, :create]
+  before_action :set_experiment, only: [:show, :edit, :update, :destroy, :users, :add_user]
+  before_action :set_tenant, only: [:show, :edit, :update, :destroy, :new, :create, :users, :add_user]
   before_action :verify_tenant
 
   # GET /experiments
   # GET /experiments.json
   def index
-    @experiments = Experiment.all
+    @experiments = Experiment.by_user_plan_and_tenant(params[:tenant_id], current_user)
   end
 
   # GET /experiments/1
@@ -27,7 +27,7 @@ class ExperimentsController < ApplicationController
   # POST /experiments.json
   def create
     @experiment = Experiment.new(experiment_params)
-
+    @experiment.users << current_user
     respond_to do |format|
       if @experiment.save
         format.html { redirect_to root_url, notice: 'Experiment was successfully created.' }
@@ -59,6 +59,23 @@ class ExperimentsController < ApplicationController
     end
   end
 
+  def users
+    @experiment_users = (@experiment.users + (User.where(tenant_id: @tenant.id, is_admin: true))) - [current_user]
+    @other_users = @tenant.users.where(tenant_id: @tenant.id, is_admin: false) - (@experiment_users + [current_user])
+  end
+  
+  def add_user
+    @experiment_user = UserExperiment.new(user_id: params[:user_id], experiment_id: @experiment.id)
+    
+    respond_to do |format|
+      if @experiment_user.save
+        format.html {redirect_to  users_tenant_experiment_url(id: @experiment.id, tenant_id: @experiment.tenant_id), notice: "User was successfully added to experiment" }
+      else
+        format.html { redirect_to users_tenant_experiment_url(id: @experiment.id, tenant_id: @experiment.tenant_id), error: "User was not added to experiment." }
+      end  
+    end  
+      
+  end  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_experiment

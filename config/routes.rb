@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
    
 
+  resources :user_experiments
   resources :artifacts
   resources :tenants do 
-   resources :experiments
+   resources :experiments do 
+     get 'users', on: :member
+     put 'add_user', on: :member
+   end
   end 
   
   resources :members

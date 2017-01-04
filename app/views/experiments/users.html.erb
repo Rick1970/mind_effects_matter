@@ -1,0 +1,50 @@
+<div class="page-header">
+  <h3>Users For Experiment: <%= @experiment.title %></h3>
+  <strong>(Other than yourself)</strong>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th><%=t '.actions', :default => t("helper.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @experiment_users.each do |experiment_user| %>
+     <tr>
+       <td><%= experiment_user.email %></td>
+       <td>
+         <%= if !experiment_user is_admin? %>
+         <%= link_to "Remove", user_experiment_path(experiment_user.user_experiments.find_by(experiment_id: @experiment.id), tenant_id: @experiment.tenant_id), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger' %>
+         <% end %>
+        </td>
+     </tr>
+    <% end %>
+  </tbody>
+</table>
+
+ <h3>Users to add to Experiment: <%= @experiment.title %></h3>
+  <strong>(Admins do not need to be added)</strong>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th><%=t '.actions', :default => t("helper.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @other_users.each do |other_user| %>
+     <tr>
+       <td><%= other_user.email %></td>
+       <td>
+         <%= link_to "Add", add_user_tenant_experiment_path(id: @experiment.id, tenant_id: @experiment.tenant_id, user_id: other_user.id), :method => :put, :class => 'btn btn-xs btn-success'%>
+        </td>
+     </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back', tenant_experiment_path(id: @experiment.id, tenant_id: @experiment.tenant_id), :class => 'btn btn-primary' %>

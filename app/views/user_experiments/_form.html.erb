@@ -1,0 +1,41 @@
+<%= form_for @user_experiment, :html => { :class => "form-horizontal user_experiment" } do |f| %>
+
+  <% if @user_experiment.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@user_experiment.errors.count, "error") %> prohibited this user_experiment from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @user_experiment.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :experiment_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :experiment_id, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:experiment_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :user_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :user_id, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:user_id) %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                user_experiments_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170104192756) do
+ActiveRecord::Schema.define(version: 20170104204003) do
 
   create_table "artifacts", force: :cascade do |t|
     t.string   "name"
@@ -83,6 +83,16 @@ ActiveRecord::Schema.define(version: 20170104192756) do
   end
 
   add_index "tenants_users", ["tenant_id", "user_id"], name: "index_tenants_users_on_tenant_id_and_user_id"
+
+  create_table "user_experiments", force: :cascade do |t|
+    t.integer  "experiment_id"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "user_experiments", ["experiment_id"], name: "index_user_experiments_on_experiment_id"
+  add_index "user_experiments", ["user_id"], name: "index_user_experiments_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                        default: "",    null: false
