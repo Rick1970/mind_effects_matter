@@ -24,7 +24,7 @@ class Experiment < ActiveRecord::Base
       if user.is_admin?  
        tenant.experiments.order(:id).limit(1)
       else
-        user.experiments_where(tenant_id: tenant.id).order(:id).limit(1)
+        user.experiments.where(tenant_id: tenant.id).order(:id).limit(1)
       end  
     end  
   end  

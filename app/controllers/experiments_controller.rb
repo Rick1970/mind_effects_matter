@@ -61,7 +61,7 @@ class ExperimentsController < ApplicationController
 
   def users
     @experiment_users = (@experiment.users + (User.where(tenant_id: @tenant.id, is_admin: true))) - [current_user]
-    @other_users = @tenant.users.where(tenant_id: @tenant.id, is_admin: false) - (@experiment_users + [current_user])
+    @other_users = @tenant.users.where(is_admin: false) - (@experiment_users + [current_user])
   end
   
   def add_user
