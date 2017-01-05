@@ -1,4 +1,4 @@
-Mind Effects Matter
+==Mind Effects Matter
 
 This is a PSI experiment management tool.
 
@@ -17,8 +17,8 @@ and stored in the cloud for easy mobile access.  The app allows for full crud fu
 * Ruby version
 
 Ruby v2.3,
-Rails v4.2.5
-Created on Cloud9 cloud IDE.
+Rails v4.2.5,
+created on Cloud9 cloud IDE.
 
 
 * Configuration
