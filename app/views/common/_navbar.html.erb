@@ -12,7 +12,10 @@
               <li><%= link_to "<i class='fa fa-users'></i> Add Members".html_safe, new_member_path, class: "navbar-link btn btn-primary" %></li>
               <li><%= link_to "<i class='fa fa-briefcase'></i> Change Plan".html_safe, edit_plan_path, class: 'btn btn-primary navbar-link' %></li>
             <% end %>
-           </ul>    
+           </ul>  
+           <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://alpha-blog-thornbrugh.herokuapp.com/">Blog</a></li>
+           </ul>  
             <ul class="nav navbar-right col-md-4">
               <% if current_user %>
               <li class="col-md-8 user-name">
