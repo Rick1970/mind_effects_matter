@@ -1,28 +1,49 @@
-== README
+Mind Effects Matter
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a PSI experiment management tool.
 
-Things you may want to cover:
+Description:
+
+This application allows users to sign up for either a free, or premium tier.  The free tier allows the user to host one 
+experiment on the application. The premium tier allows the user to host unlimited experiments on the site.
+
+Once the user is signed up; they are designated as the admin.  They designate who the other participants are. An email 
+notification/invitation is sent to the other parties.  Upon clicking the sent link; the other parties set their password
+for site/experiment access.  The admin can then add the parties he selects to whatever experiments he/she chooses.
+
+Only the admin can create invitations, and assign users to projects.  Documents regarding the project can be uploaded, 
+and stored in the cloud for easy mobile access.  The app allows for full crud functionality throughout.
 
 * Ruby version
 
-* System dependencies
+Ruby v2.3,
+Rails v4.2.5
+Created on Cloud9 cloud IDE.
+
 
 * Configuration
 
-* Database creation
+Verify Ruby, and rails installation.
+Clone the project from:
+https://github.com/Rick1970/mind_effects_matter
+Run bundle install --without production  to load gems/dependencies from the command line.
+Run rake db:create db:migrate from the comand line to create database schema.
+Run rake db:migrate on the command line to initalize/create data base via activerecord migration.
+Run rails serve to run the app in local host.
 
-* Database initialization
+* See the app live at:
 
-* How to run the test suite
+https://mind-effects-matter-rthornbrug.herokuapp.com
 
-* Services (job queues, cache servers, search engines, etc.)
+deployed via Heroku.
 
-* Deployment instructions
+* Support, and contact details
 
-* ...
+Feel free to contact me at rthornbrug@gmail.com
 
+* License
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+This software is licensed under the MIT license.
+
+Copyright (c) [2016]  Rick Thornburgh
+

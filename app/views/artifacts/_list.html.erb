@@ -11,8 +11,8 @@
   <tbody>
     <% artifacts.each do |artifact| %>
       <tr>
-        <td><%= link_to artifact.name, artifact_path(artifact), class: 'main-link' %></td>
-        <td><%= s3_link Tenant.current_tenant_id, artifact.key %></td>
+       <td><%= link_to artifact.name, artifact_path(artifact), class: 'main-link' %></td>
+       <td><%= s3_link Tenant.current_tenant_id, artifact.key %></td>
         <td>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       artifact_path(artifact),
@@ -25,6 +25,5 @@
   </tbody>
 </table>
 
-<%= link_to 'New Artifact',
-            new_artifact_path(experiment_id: @experiment.id),
-            :class => 'btn btn-primary' %>
+  <%= link_to 'New Artifact', new_artifact_path(experiment_id: @experiment.id),
+  :class => 'btn btn-primary' %>
