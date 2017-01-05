@@ -2,7 +2,7 @@
 
 This is a PSI experiment management tool.
 
-Description:
+* Description:
 
 This application allows users to sign up for either a free, or premium tier.  The free tier allows the user to host one 
 experiment on the application. The premium tier allows the user to host unlimited experiments on the site.
